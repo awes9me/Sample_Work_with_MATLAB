@@ -1,0 +1,36 @@
+% Ex 4.06 pg 115
+% Write a function that will generate chi-square random variables with ν
+% degrees of freedom by generating ν standard normals, squaring them and
+% then adding them up. This uses the fact that X = Z1^2 + ... + Zν^2
+% is chi-square with ν degrees of freedom. Generate some random variables
+% and plot in a histogram. The degrees of freedom should be an input
+% argument set by the user.
+
+clear,clc
+% prompt = 'Choose the degrees of freedom: '; % removed prompt for testing
+% df = input(prompt);
+df = [3 10 500];
+s = [500 750 1500];
+n = 1000;
+
+for k=1:length(df)       % loop for the three degrees of freedom
+    for j=1:n            % loop for n = 1-1000
+        for i=1:df(k)    % loop for creating Zi^2's
+            Z(i)=randn(1)^2; % Z vector
+        end
+        X(j)=sum(Z);     % adding up Zi^2 and storing as Xi
+    end
+    subplot(3,1,k)       % to view all three histograms in one figure
+    [N, h] = hist(X,50); % histogram of X for each df
+    % superimposing the density curve
+    % Change bar heights.
+    N = N/(h(2)-h(1))/n;
+    % Now get the theoretical probability density.
+    x = 0:.01:max(X);
+    y = chi2pdf(x,df(k));
+    plot(x,y), axis equal, bar(h,N,1), hold on
+    plot(x,y,'r', 'LineWidth',1), hold off
+    title('Chi-Square with df = ', df(k))
+end
+
+
