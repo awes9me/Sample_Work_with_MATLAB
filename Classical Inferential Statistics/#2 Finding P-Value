@@ -9,3 +9,4 @@ xbar = 47.2;
 zobs = (xbar - mu)/sig;
 
 pval = 1-normcdf(zobs,0,1);
+ 
