@@ -1,0 +1,68 @@
+clc, clear
+ 
+% Part A, generating 500 gamma(2,3) samples
+r = gamrnd(2, 3, 500, 1);
+n = length(r);
+mu = mean(r);
+var = var(r);
+
+% Part B
+% Assigning fixed alpha0 and chosen beta0
+alpha0 = 2;
+beta0 = 1.5;
+  
+%Finding Information matrix and Score vector
+Io = [2*n/beta0^2]
+Uo = [-2*n/beta0 + sum(r)/beta0^2]
+ 
+iter = 1; % Assigning initial iteration count
+ 
+fprintf('------------------------------------------------------\n')
+fprintf('\nUsing Newton-Raphson method, the MLE for beta = %1.4f\n',...
+    beta0)
+beta= beta0 + Io \ Uo; 
+fprintf('Iteration count is at %d\n', iter)
+while ( abs(beta-beta0) > 0.0001 )
+    beta0=beta;
+    Io = [2*n/beta0^2];
+    Uo = [-2*n/beta0 + sum(r)/beta0^2];
+    
+    beta=beta0 + Io \ Uo;
+    fprintf('\nUsing Newton-Raphson method, the MLE for beta = %1.4f\n',...
+        beta)
+    iter=iter+1;
+    fprintf('Iteration count is at %d\n', iter)
+end
+
+% MLE function
+fprintf('------------------------------------------------------\n')
+mlethetahat=mle('gamma',r);
+fprintf('\nUsing the MLE function, alpha = %1.4f and beta = %1.4f\n', ...
+    mlethetahat(1), mlethetahat(2))
+ 
+% Estimating MME for beta
+fprintf('\n------------------------------------------------------\n')
+
+m2=(1/n)*sum(r.^2);
+MME_beta = (m2-mu^2)/mu;
+fprintf('\nUsing the MME from notes, beta = %1.4f\n', MME_beta)
+
+fprintf('\n------------------------------------------------------\n')
+
+% Part C
+b = 0:0.0001:5;
+logL = inline('-2*n*log(b)+sum(log(r))-sum(r)./b', 'n', 'b', 'r');
+
+y = logL(n, b, r);
+plot(b, y, 'b','LineWidth',1), hold on
+
+[max, loc]=max(y);
+bhat=b(loc)
+
+plot(bhat, max,'*'), hold off
+axis square
+text(bhat,max, 'MLE','VerticalAlignment','bottom','HorizontalAlignment','left')
+
+line([bhat bhat], [-2 max], 'Color','red','LineStyle',':','LineWidth',1.75)
+grid, xlabel('b'), ylabel('LogL(b)')
+
