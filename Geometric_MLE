@@ -1,0 +1,45 @@
+
+r = geornd(0.2,100,1);
+
+phat1 = mle('geometric', r)
+phat2 = 1/(1+mean(r));
+
+
+logL = inline('n.*ybar.*log(1-p)+n.*log(p)','n','ybar','p')
+
+n=length(r); ybar=mean(r); p=0.01:0.0001:.99;
+
+y=logL(n,ybar,p)
+
+figure(1)
+subplot(121)
+plot(p,y), hold on
+grid, xlabel('p'), ylabel('logL(p)')
+
+[maxlogL, loc]=max(y); phat3=p(loc)
+plot(phat3, maxlogL, '*'), hold off
+axis square
+
+subplot(122)
+len=length(p);
+appdiff=diff(y)./diff(p);
+plot(p(2:len),appdiff), hold on
+plot([0 1],[0 0], '--')
+plot(phat2, 0, 'R*'), hold off
+grid, axis square
+
+%Newton Method
+
+p0=0.1;
+tol=.0001;
+loop=0;
+maxloop=100;
+Nphat = p0+(1-p0-p0*ybar)*p0;
+
+while abs(Nphat-p0)>tol && loop < maxloop
+    p0=Nphat;
+    Nphat=p0+(1-p0-p0*ybar)*p0;
+    loop=loop+1;
+end
+
+loop,Nphat
