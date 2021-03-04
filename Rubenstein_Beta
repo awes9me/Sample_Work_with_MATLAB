@@ -1,0 +1,25 @@
+% Ex 4.07 pg 115
+
+% An alternative method for generating beta random variables is described
+% in Rubinstein [1981]. Generate two variates Y1 = U1^1⁄α and Y2 = U2^1⁄β,
+% where the Ui are from the uniform distribution. If Y1 + Y2 ≤ 1, then
+% X = Y1/(Y1 +Y2), is from a beta distribution with parameters α and β.
+% Implement this algorithm.
+
+
+n = 1000;
+a_b = [0.5, 1, 9]; % alpha and beta values
+
+for i = 1:3
+    data(:,:,i) = rubinstein(a_b(i),a_b(i),n);
+    subplot(3,1,i)
+    [N, h]=hist(data(:,:,i),30);
+    % Change bar heights.
+    N = N/(h(2)-h(1))/n;
+    % Now get the theoretical probability density.
+    x = 0:0.01:max(data(:,:,i));
+    y = betapdf(x, a_b(i), a_b(i));
+    plot(x,y), axis equal, bar(h,N,1), hold on
+    plot(x,y,'r', 'LineWidth',1), hold off
+    title('Rubenstein with alpha = beta = ', a_b(i))
+end
