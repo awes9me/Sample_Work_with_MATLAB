@@ -1,0 +1,54 @@
+data=chi2rnd(5,200,1);
+n=length(data);
+
+%%%%%%%% Mean %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+bootreps=bootstrp(n,'mean',data);
+bootbias1=mean(bootreps)-mean(data)
+bootse1=std(bootreps)
+
+[b1,se1,jvals]=csjack(data,'mean');
+jvalinf=mean(jvals)+sqrt(n-1)*(jvals-mean(jvals));
+jackbias1=(n-1)*(mean(jvals)-mean(data))
+jackse1=std(jvalinf,1)
+
+figure(1)
+subplot(221)
+hist(bootreps)
+axis([3 6 0 60])
+title('bootstrap')
+
+subplot(222)
+hist(jvals)
+axis([3 6 0 60])
+title('jackknief')
+
+subplot(223)
+hist(jvalinf)
+axis([3 6 0 60])
+title('inflated jackknief')
+
+%%%%%% Median %%%%%%%%%%%%%%
+bootreps=bootstrp(n,'median',data);
+bootbias2=mean(bootreps)-mean(data)
+bootse2=std(bootreps)
+
+[b1,se1,jvals]=csjack(data,'median');
+jvalinf=mean(jvals)+sqrt(n-1)*(jvals-mean(jvals));
+jackbias2=(n-1)*(mean(jvals)-mean(data))
+jackse2=std(jvalinf,1)
+
+figure(2)
+subplot(221)
+hist(bootreps)
+axis([3 6 0 60])
+title('bootstrap')
+
+subplot(222)
+hist(jvals)
+axis([3 6 0 60])
+title('jackknief')
+
+subplot(223)
+hist(jvalinf)
+axis([3 6 0 60])
+title('inflated jackknief')
