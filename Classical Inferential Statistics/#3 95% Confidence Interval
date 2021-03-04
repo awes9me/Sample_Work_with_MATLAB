@@ -19,3 +19,4 @@ zlo = norminv(1-alpha/2,0,1);
 zhi = norminv(alpha/2,0,1); 
 thetalo = xbar - zlo*sig/sqrt(n); 
 thetaup = xbar - zhi*sig/sqrt(n);
+ 
