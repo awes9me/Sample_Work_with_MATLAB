@@ -1,0 +1,29 @@
+% (a) Use the inverse CDF method to generate a random sample of size 1000 
+% from Binomial distribution with n=20 and p=0.3. Give the relative 
+% frequency histogram of your random sample and compare with the 
+% theoretical pdf of Binomial distribution. 
+% (b)  Repeat (a) with n=10 and p=0.05. Discuss your findings. 
+
+
+
+
+n = 1000;
+int=0:20;
+bin=binocdf(int, 10, 0.5);
+
+% figure(2), plot(xx,y)
+
+for i = 1:n
+    u = rand(1);
+    for j = 2:length(int)
+        if u <= bin(1)
+            x(i) = 0;
+        elseif u > bin(j-1) && u <= bin(j)
+            x(i) = j-1;
+        end
+    end
+end
+histogram(x)
+title('Inverse CDF with n = 10, p = 0.50')
+
+
