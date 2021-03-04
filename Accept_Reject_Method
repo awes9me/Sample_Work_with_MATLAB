@@ -1,0 +1,45 @@
+% c4_class_ex1
+
+n=1000;
+
+c = 2.11;
+x = zeros(1,n);
+xy = zeros(1,n);
+rej = zeros(1,n);
+rejy = zeros(1,n);
+irv = 1;
+irej = 1;
+
+while irv <= n
+    y = rand(1);
+    u = rand(1);
+    if u <=(20*y*(1-y)^3)/c
+        x(irv) = y;
+        xy(irv) = u*c;
+        irv = irv+1;
+    else
+        rej(irej) = y;
+        rejy(irej) = u*c;
+        irej = irej+1;
+    end
+end
+acc_rate = irv/(irv+irej)
+
+figure(1)
+plot(x,xy,'o',rej,rejy,'*')
+axis([0 1 0 c])
+axis square
+
+figure(2)
+[fr,x]=hist(x);
+h = x(2)-x(1);
+bar(x, fr/(n*h),1,'w')
+axis square
+hold on
+xx=0:0.01:1;
+yy=20.*xx.*(1-xx).^3;
+plot(xx,yy)
+hold off
+
+
+        
