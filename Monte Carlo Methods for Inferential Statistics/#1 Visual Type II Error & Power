@@ -4,7 +4,7 @@
 mualt = 40:60;
 
 % Critical value
-cv = norminv(0.95,0,1)
+cv = norminv(0.95,0,1) % 1.645
 % Note the standard deviation for x-bar:
 sig = 1.5;
 % It's easier to use the non-standardized version, 
