@@ -1,0 +1,18 @@
+Let’s look at the example of the transportation official who wants to determine 
+whether the average travel time to work has increased from the time it took in 
+1995. The mean travel time to work for northern Virginia residents in 1995 was 
+45 minutes. Since he wants to deter- mine whether the mean travel time has increased, 
+the statistical hypotheses are given by:
+H0: μ = 45 minutes
+H1: μ > 45 minutes.
+
+Let’s return to the example of the travel time to work for northern Virginia residents. 
+To perform the analysis, the transportation official takes a random sample of 100 
+residents in northern Virginia and measures the time it takes them to travel to work. 
+He uses the sample mean to help determine whether there is sufficient evidence to reject 
+the null hypothesis and conclude that the mean travel time has increased. The sample 
+mean that he calculates is 47.2 minutes. This is slightly higher than the mean of 
+45 minutes for the null hypothesis. However, the sample mean is a random variable and 
+has some variation associated with it. If the variance of the sample mean under the 
+null hypothesis is large, then the observed value of x = 47.2 minutes might not be 
+inconsistent with H0 .
