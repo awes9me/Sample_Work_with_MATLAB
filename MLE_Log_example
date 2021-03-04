@@ -1,0 +1,36 @@
+data = geornd(0.2,100,1);
+
+phat1 = mle('geometric', data)
+phat2 = 1/(1+mean(data));
+
+logL = inline('n*(ybar*log(1-p)+log(p))', 'n', 'ybar', 'p');
+
+p = 0.01:0.01:1;
+n = length(data);
+ybar = mean(data);
+
+y = logL(n, ybar, p)
+
+ymax= max(y);
+x = p(y == ymax)
+% yy=x*ones(1,2000)
+% find(y == max(y))
+
+y_i=1:1:100;
+f_y=(1-p).^y_i.*p;
+
+%plot(p, y, 'b', p, f_y,'g')
+subplot(2,1,1)
+plot(p, y, 'b',x,ymax,'o')
+text(x,ymax, 'MLE','VerticalAlignment','bottom','HorizontalAlignment','left')
+%text(x,ymax,'MLE')
+line([x x], [y(99) ymax], 'Color','red','LineStyle',':','LineWidth',1.75)
+ylim([min(y) 0])
+title('Log Function Practice') 
+ylabel('y=logL') 
+xlabel('p') 
+
+subplot(2,1,2)
+plot(p, f_y, 'g')
+ylabel('f(y|p)') 
+xlabel('y') 
