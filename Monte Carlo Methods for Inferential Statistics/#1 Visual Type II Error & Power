@@ -3,8 +3,8 @@
 % below the null hypothesis.
 mualt = 40:60;
 
-% Note the critical value for 90%
-cv = 1.645;
+% Critical value
+cv = norminv(0.95,0,1)
 % Note the standard deviation for x-bar:
 sig = 1.5;
 % It's easier to use the non-standardized version, 
