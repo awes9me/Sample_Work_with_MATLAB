@@ -1,0 +1,11 @@
+% We repeat the hypothesis test of #1 using the p- value approach. 
+% First we set some of the values we need:
+
+mu = 45;
+sig = 1.5;
+xbar = 47.2;
+
+% Get the observed value of test statistic. 
+zobs = (xbar - mu)/sig;
+
+pval = 1-normcdf(zobs,0,1);
