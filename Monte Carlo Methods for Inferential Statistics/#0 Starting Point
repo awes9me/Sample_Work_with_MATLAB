@@ -1,0 +1,32 @@
+PROCEDURE – BASIC MONTE CARLO SIMULATION
+1. Determine the pseudo-population or model that represents the true population of interest.
+2. Use a sampling procedure to sample from the pseudo-population or distribution.
+3. Calculate a value for the statistic of interest and store it.
+4. Repeat steps 2 and 3 for M trials.
+5. Use the M values found in step 4 to study the distribution of the statistic.
+
+PROCEDURE – MONTE CARLO HYPOTHESIS TESTING (CRITICAL VALUE)
+1. Using an available random sample of size n from the population
+of interest, calculate the observed value of the test statistic, to .
+2. Decide on a pseudo-population that reflects the characteristics of
+the true population under the null hypothesis.
+3. Obtain a random sample of size n from the pseudo-population.
+4. Calculate the value of the test statistic using the random sample in step 3 and record it.
+5. Repeat steps 3 and 4 for M trials. We now have values t1, ..., tM , that serve as an estimate 
+   of the distribution of the test statistic, T, when the null hypothesis is true.
+6. Obtain the critical value for the given significance level α : 
+   Lower Tail Test: get the α-th sample quantile, qˆα , from the
+     t1, ..., tM .
+   Upper Tail Test: get the (1 – α)-th sample quantile, qˆ1 – α , from the
+     t1, ..., tM .
+   Two-Tail Test: get the sample quantiles qα ⁄ 2 and q1 – α ⁄ 2 from the
+     t1, ..., tM .
+7. If to falls in the critical region, then reject the null hypothesis.
+
+*************************************************************************************************
+The files in this folder will work with and build off of the following:
+The mcdata data set contains 25 observations. 
+We are interested in using these data to test the following null and alternative hypotheses:
+
+H0: μ = 454
+H1: μ < 454.
