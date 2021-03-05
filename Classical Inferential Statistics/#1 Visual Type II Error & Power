@@ -26,3 +26,4 @@ plot(mualt,pow);
 xlabel('True Mean \mu') 
 ylabel('Power') 
 axis([40 60 0 1.1])
+ 
